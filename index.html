@@ -55,7 +55,20 @@ h1{
     font-size:24px;
     color:#111;
 }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
 
+    -webkit-text-fill-color:#000 !important;
+
+    -webkit-box-shadow:0 0 0 1000px transparent inset !important;
+    box-shadow:0 0 0 1000px transparent inset !important;
+
+    background:transparent !important;
+
+    transition:background-color 9999s ease-in-out 0s;
+}
 .toggle-password{
     position:absolute;
     right:10px;
