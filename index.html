@@ -153,6 +153,8 @@ function login() {
 
     if (users[username] === password) {
 
+        sessionStorage.setItem("loggedIn", "true");
+
         window.location.replace("home.html");
 
     } else {
@@ -160,9 +162,9 @@ function login() {
         alert("Invalid Username or Password");
 
     }
+
 }
 
 </script>
-
 </body>
 </html>
