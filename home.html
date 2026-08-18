@@ -3,9 +3,14 @@
 <html lang="en">
 <head>
 <script>
+window.addEventListener("beforeunload", function () {
+    sessionStorage.removeItem("loggedIn");
+});
+
 if (sessionStorage.getItem("loggedIn") !== "true") {
     window.location.replace("index.html");
 }
+
 </script>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -254,3 +259,8 @@ h2 {
 <a class="btn teal-btn" href="https://sagilityassessment-cmyk.github.io/testingroomBOHOL/" rel="noopener noreferrer" target="_blank"> BOHOL</a>
 </div>
 </div>
+<script>
+window.addEventListener("beforeunload", function () {
+    sessionStorage.removeItem("loggedIn");
+});
+</script>
