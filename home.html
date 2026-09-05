@@ -233,6 +233,45 @@ h2 {
     margin-bottom: 30px;
 }
 
+@media (min-width: 701px) and (max-width: 1000px) {
+    body {
+        padding-top: 130px;
+    }
+
+    .preemp-layout {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .preemp-panel {
+        width: auto;
+        flex: 1 1 auto;
+    }
+
+    .workday-panel {
+        flex: 0 1 250px;
+        width: auto;
+        max-width: 250px;
+    }
+
+    .section {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 15px;
+        padding: 0 20px;
+    }
+
+    .section .column {
+        min-width: 0;
+    }
+
+    .section .btn {
+        width: 100%;
+        max-width: none;
+    }
+}
+
 
 .column {
     display: flex;
