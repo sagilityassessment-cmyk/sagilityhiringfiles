@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sagility Files Login</title>
+<title>Sagility Files</title>
+<meta http-equiv="refresh" content="0; url=home.html">
 
 <style>
 *{
@@ -111,74 +112,6 @@ button:hover{
 </head>
 
 <body>
-
-<div class="login-box">
-
-    <h1>SAGILITY FILES</h1>
-
-    <div class="input-group">
-        <input type="text" id="username" placeholder="Username">
-    </div>
-
-    <div class="input-group">
-        <input type="password" id="password" placeholder="Password">
-        <span class="toggle-password" onclick="togglePassword()">👁</span>
-    </div>
-
-    <div class="remember">
-        <input type="checkbox">
-        <span>Remember Me</span>
-    </div>
-
-    <button type="button" onclick="login()">Login</button>
-
-    <div class="creator">
-        Created by Richiel Caña
-    </div>
-
-</div>
-
-<script>
-
-function togglePassword() {
-
-    const passwordField = document.getElementById("password");
-
-    if (passwordField.type === "password") {
-        passwordField.type = "text";
-    } else {
-        passwordField.type = "password";
-    }
-
-}
-
-function login() {
-
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value;
-
-    const users = {
-        "Richiel.Cana": "Sagility_2026",
-        "Shaine.Maigue": "Sagility_2026",
-        "Lea.Susaya": "Sagility_2026",
-        "Alondra.Rivares": "Sagility_2026",
-        "Leofila.Cabanig": "Sagility_2026"
-    };
-
-    if (users[username] === password) {
-
-        sessionStorage.setItem("loggedIn", "true");
-
-        window.location.replace("home.html");
-
-    } else {
-
-        alert("Invalid Username or Password");
-
-    }
-
-}
-
-</script>
+<p>Redirecting to Sagility Files...</p>
 </body>
 </html>

@@ -2,16 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-window.addEventListener("beforeunload", function () {
-    sessionStorage.removeItem("loggedIn");
-});
-
-if (sessionStorage.getItem("loggedIn") !== "true") {
-    window.location.replace("index.html");
-}
-
-</script>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Sagility Files</title>
@@ -20,41 +10,115 @@ if (sessionStorage.getItem("loggedIn") !== "true") {
 body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 135px 0 0;
     text-align: center;
+    background-color: #cfe9fb;
+    background-image:
+        linear-gradient(135deg, rgba(255,255,255,.38) 25%, transparent 25%),
+        linear-gradient(315deg, rgba(151,201,239,.3) 25%, transparent 25%),
+        linear-gradient(180deg, #bfe0f7 0%, #eaf7ff 100%);
+    background-size: 420px 420px, 520px 520px, 100% 100%;
+    background-attachment: fixed;
 }
 
 .header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
     z-index: 9999;
-    background: white;
-    border-bottom: 2px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    width: 100%;
+    margin: 0;
+    padding: 12px 24px 14px;
+    box-sizing: border-box;
+    background: rgba(207, 233, 251, .94);
+    backdrop-filter: blur(8px);
+    border-bottom: 3px solid #28b77b;
 }
 
 .creator {
-    margin-top: 3px;  
-    margin-bottom: 3px; 
+    margin: 4px 0 0;
     font-size: 15px;
+    color: #244b78;
+    text-align: left;
 }
 
 img.logo {
     max-width: 220px;
     display: block;
-    margin: 0 auto;
+    flex: 0 0 220px;
+    margin: 0;
+}
+
+.header-copy {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px 22px;
+    border: 1px solid #83b9ed;
+    border-radius: 12px;
+    background: rgba(215, 235, 255, .86);
+    text-align: left;
 }
 
 h1 {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 800;
-    color: #000;
-    background-color: #e0e0e0;
-    padding: 10px 20px;
-    border-radius: 8px;
-    display: inline-block;
+    color: #245596;
+    margin: 0;
+}
 
-    margin-top: 5px;    /* reduce space below logo */
-    margin-bottom: 10px;
+.header-details {
+    min-width: 0;
+}
+
+.search-form {
+    display: flex;
+    flex: 0 1 520px;
+    gap: 8px;
+}
+
+.search-form input {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 12px;
+    border: 1px solid #83b9ed;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, .9);
+    color: #173f73;
+    font: inherit;
+}
+
+.search-form button {
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 7px;
+    background: #20b878;
+    color: white;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background: #168d5c;
+}
+
+.search-status {
+    min-width: 72px;
+    color: #245596;
+    font-size: 12px;
+    text-align: right;
+}
+
+.search-match {
+    outline: 4px solid #ffd166;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px rgba(255, 209, 102, .28);
 }
 
 h2 {
@@ -90,7 +154,7 @@ h2 {
     justify-content: center;
 }
 
-.green-btn { background-color: #00BFA5; color: WHITE; }
+.green-btn { background-color: #20b878; color: WHITE; }
 .orange-btn { background-color: #FF6F00; color: white; }
 .blue-btn { background-color: #1A2E81; color: white; }
 
@@ -121,6 +185,42 @@ h2 {
 .btn:hover {
     opacity: 0.9;
 }
+
+@media (max-width: 700px) {
+    body {
+        padding-top: 215px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 14px;
+    }
+
+    img.logo {
+        flex-basis: auto;
+        max-width: 190px;
+    }
+
+    .header-copy {
+        display: block;
+        width: 100%;
+        padding: 14px 16px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .search-form {
+        margin-top: 12px;
+        max-width: none;
+    }
+
+    .search-status {
+        display: none;
+    }
+}
 </style>
 </head>
 
@@ -128,8 +228,17 @@ h2 {
 
 <div class="header">
 <img alt="Sagility Logo" class="logo" src="logo.png"/>
+<div class="header-copy">
+<div class="header-details">
 <h1>SAGILITY FILES</h1>
 <p class="creator">Created by Richiel Caña</p>
+</div>
+<form class="search-form" id="search-form" role="search">
+<input id="site-search" type="search" placeholder="Search files or sections" aria-label="Search files or sections" autocomplete="off"/>
+<button type="submit">Search</button>
+<span class="search-status" id="search-status" aria-live="polite"></span>
+</form>
+</div>
 </div>
 <!-- Pre-Employment Files Section -->
 <h2>PRE-EMPLOYMENT SECTION</h2>
@@ -266,7 +375,39 @@ h2 {
 </div>
 </div>
 <script>
-window.addEventListener("beforeunload", function () {
-    sessionStorage.removeItem("loggedIn");
+const searchForm = document.getElementById("search-form");
+const searchInput = document.getElementById("site-search");
+const searchStatus = document.getElementById("search-status");
+const searchableItems = Array.from(document.querySelectorAll("h2, .btn"));
+
+function searchFiles() {
+    const keyword = searchInput.value.trim().toLowerCase();
+
+    searchableItems.forEach((item) => item.classList.remove("search-match"));
+
+    if (!keyword) {
+        searchStatus.textContent = "";
+        return;
+    }
+
+    const matches = searchableItems.filter((item) =>
+        item.textContent.toLowerCase().includes(keyword)
+    );
+
+    matches.forEach((item) => item.classList.add("search-match"));
+
+    if (matches.length) {
+        matches[0].scrollIntoView({ behavior: "smooth", block: "center" });
+        searchStatus.textContent = `${matches.length} found`;
+    } else {
+        searchStatus.textContent = "No matches";
+    }
+}
+
+searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    searchFiles();
 });
+
+searchInput.addEventListener("input", searchFiles);
 </script>
