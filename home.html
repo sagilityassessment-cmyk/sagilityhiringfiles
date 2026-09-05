@@ -215,6 +215,23 @@ h2 {
     font-size: 14px;
 }
 
+.sagility-grid .column:nth-child(-n + 2) .lightblue-btn {
+    height: 45px;
+    box-sizing: border-box;
+}
+
+.sagility-grid .column:nth-child(3) .lightblue-btn {
+    height: 125px;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.sagility-grid .standalone-blue-btn {
+    height: 64px;
+    box-sizing: border-box;
+}
+
 .assessment-level {
     display: table;
     max-width: 100%;
@@ -442,6 +459,41 @@ h2 {
         max-width: none;
     }
 
+    .sagility-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        padding: 0 4px;
+    }
+
+    .other-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        padding: 0 4px;
+    }
+
+    .sagility-grid .column {
+        gap: 8px;
+    }
+
+    .sagility-grid .column:nth-child(-n + 2) .lightblue-btn {
+        height: 38px;
+        padding: 4px 2px;
+        font-size: 8px;
+    }
+
+    .sagility-grid .standalone-blue-btn {
+        height: 48px;
+        padding: 4px 2px;
+        font-size: 8px;
+    }
+
+    .sagility-grid .column:nth-child(3) .lightblue-btn {
+        height: 88px;
+        padding: 4px 2px;
+        font-size: 8px;
+        line-height: 1.1;
+    }
+
     .government-grid .btn {
         height: auto;
         font-size: 10px;
@@ -565,7 +617,7 @@ h2 {
 </div>
 </div>
 <!-- Assessment Files Section -->
-<h2>ASSESSMENT SECTION</h2>
+<h2>ASSESSMENT FILES SECTION</h2>
 <div class="section assessment-grid">
 <div class="column">
 <a class="dark-green-btn btn"  rel="noopener noreferrer" target="_blank">SET 1</a>
@@ -589,8 +641,8 @@ h2 {
 </div>
 </div>
 <!-- Assessment Files Section -->
-<h2>SAGILITY FILES SECTION</h2>
-<div class="section">
+<h2>OTHER ASSESSMENT SECTION</h2>
+<div class="section sagility-grid">
 <div class="column">
 <a class="standalone-blue-btn btn"  target="_blank">STANDALONE  <br> ASSESSMENT</a>
 <a class="lightblue-btn btn" href="https://journey.harver-us.com/vacancy/67e314c6fdb051af4a247646 " rel="noopener noreferrer" target="_blank">Spoken B1/B2</a>
@@ -615,7 +667,11 @@ h2 {
 <a class="lightblue-btn btn" href="https://journey.harver-us.com/vacancy/680f7781527167ce829a0628" rel="noopener noreferrer" target="_blank">Level 2 <br>English B2<br>Typing<br>Registered Nursing Test</a>
 <a class="standalone-blue-btn btn" target="_blank">ENLYTE UNITY<br> ASSESSMENT</a>
 <a class="lightblue-btn btn" href="https://journey.harver-us.com/vacancy/680f7607527167ce829a05bf" rel="noopener noreferrer" target="_blank">Level 2 <br>English B2<br>Typing<br>Registered Nursing Test</a>
-</div>  
+</div>
+</div>
+<!-- OTHER Files Section -->
+<h2>OTHER SECTION</h2>
+<div class="section other-grid">
 <div class="column">
 <a class="dark-grey-btn btn"  target="_blank">OTHER ASSESSMENT <br> FILES</a>
 <a class="light-grey-btn btn" href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_YWUyMzUzYzYtNTgxYS00ZWVhLWJjN2UtNTA4YWM2Mzg1Zjdk%40thread.v2/0?context=%7b%22Tid%22%3a%22c0745124-84a4-4909-bb95-307ad5a8ae15%22%2c%22Oid%22%3a%22e7eb26f1-7544-4bac-bfac-c4674034791e%22%7d" rel="noopener noreferrer" target="_blank">Virtual Assessment</a>
@@ -659,6 +715,26 @@ document.querySelectorAll(".btn").forEach((link) => {
 
     link.replaceWith(button);
 });
+
+const header = document.querySelector(".header");
+const preEmployment = document.querySelector(".preemp-layout");
+const sectionBlock = (title) => {
+    const heading = Array.from(document.querySelectorAll("h2")).find((item) =>
+        item.textContent.trim() === title
+    );
+
+    return heading ? [heading, heading.nextElementSibling] : [];
+};
+
+const orderedSections = [
+    ...sectionBlock("ASSESSMENT FILES SECTION"),
+    ...sectionBlock("OTHER ASSESSMENT SECTION"),
+    ...sectionBlock("GOVERNMENT SECTION"),
+    preEmployment,
+    ...sectionBlock("OTHER SECTION")
+].filter(Boolean);
+
+header.after(...orderedSections);
 
 const searchForm = document.getElementById("search-form");
 const searchInput = document.getElementById("site-search");
